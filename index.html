@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectVerse</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        
+        body {
+            color: #ffffff;
+            line-height: 1.5;
+            background-color: rgb(5, 3, 11);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: rgba(255, 255, 255, 0.5);
+            /* border-bottom: 1px solid rgb(104, 68, 142); */
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: rgb(104, 68, 142);
+            justify-content: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 15px;
+        }
+        
+        .nav-links a:hover {
+            color: rgb(104, 68, 142);
+        }
+        
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .login-btn {
+            background: none;
+            border: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        
+        .demo-btn {
+            background-color: rgb(104, 68, 142);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 60px 0 20px;
+            text-align: center;
+            background-image: url("./src/beautify/violet-moon.gif");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        .checkout-preview {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            border: 1px solid #eee;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .item-details {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .item-image {
+            width: 50px;
+            height: 50px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+        }
+        
+        .item-info h4 {
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        
+        .item-info p {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .item-price {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 16px;
+            font-weight: 600;
+            font-size: 16px;
+            padding-top: 12px;
+            border-top: 1px solid #eee;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: rgb(104, 68, 142);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 500;
+            margin-top: 16px;
+            cursor: pointer;
+        }
+        
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .payment-method {
+            height: 24px;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        
+        .payment-method:hover {
+            opacity: 1;
+        }
+        
+        .trust-text {
+            margin-top: 30px;
+        }
+        
+        /* Problem Section */
+        .problem-section {
+            padding: 60px 0 30px 0;
+            background-color: #000000;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 60px;
+        }
+        
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .problem-card {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .problem-card h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #000000;
+        }
+        
+        .problem-card p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        
+        .integrations-link {
+            display: block;
+            text-align: center;
+            margin-top: 40px;
+            color: rgb(104, 68, 142);
+            font-weight: 500;
+            text-decoration: none;
+            font-size: 15px;
+        }
+        
+        /* Solutions Section */
+        .solutions-section {
+            padding: 80px 0;
+            background-color: #1a042b;
+        }
+        
+        .solution-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        
+        .solution-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+        
+        .solution-content {
+            padding: 25px;
+        }
+        
+        .solution-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .solution-card p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        
+        .solution-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .solution-btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .primary-btn {
+            background-color: rgb(104, 68, 142);
+            color: white;
+            border: none;
+        }
+        
+        .secondary-btn {
+            background: none;
+            border: 1px solid rgb(104, 68, 142);
+            color: rgb(104, 68, 142);
+        }
+        
+        .solution-image {
+            width: 100%;
+            height: 350px;
+            background-color: #f5f5f5;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Testimonial Section */
+        .testimonial-section {
+            padding: 80px 0;
+            background-color: #1a042b;
+            text-align: center;
+            /* background-image: url("./src/beautify/purple-forest.jpg"); */
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .awards {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .award {
+            text-align: center;
+        }
+        
+        .award-icon {
+            font-size: 40px;
+            color: rgb(104, 68, 142);
+            margin-bottom: 10px;
+        }
+        
+        .testimonial {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 18px;
+            color: #fffdfd;
+            line-height: 1.6;
+            font-style: italic;
+        }
+        
+        .author {
+            font-weight: 600;
+            color: #fffefe;
+            font-style: normal;
+        }
+        
+        /* Blog Section */
+        .blog-section {
+            padding: 40px 0;
+        }
+        
+        .blog-posts {
+            /* display: grid; */
+            /* grid-template-columns: repeat(2, 1fr);
+            gap: 25px; */
+        }
+        
+        .blog-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(255, 254, 254, 0.05);
+            border: 1px solid #eee;
+        }
+        
+        .blog-image {
+            width: 100%;
+            height: 180px;
+            background-color: #f5f5f5;
+        }
+        
+        .blog-content {
+            padding: 20px;
+        }
+        
+        .blog-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            background-color: #f5f5f5;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .blog-card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .twitter-timeline {
+            overflow-y:scroll;
+            height: 1000px;
+        }
+        
+        /* Advancements Section */
+        .advancements-section {
+            padding: 80px 0;
+            /* background-color: #f9f9f9; */
+            text-align: center;
+            background-image: url("./src/beautify/dias.avif");
+            background-position: center;
+        }
+        
+        /* Footer */
+        footer {
+            /* background-color: #f9f9f9; */
+            padding: 0 0 30px;
+            /* border-top: 1px solid #eee; */
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: rgb(104, 68, 142);
+            margin-bottom: 20px;
+        }
+        
+        .footer-links h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            text-decoration: none;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .footer-links a:hover {
+            color: rgb(104, 68, 142);
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 20px;
+            /* border-top: 1px solid #eee; */
+            color: #999;
+            font-size: 13px;
+        }
+        
+        .footer-bottom-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-bottom-links a {
+            color: #999;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .problem-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .solution-cards, .blog-posts {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .problem-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <!-- <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img style="width: 200px;" src="./src/logo/transparent background/white-horizontal.png" />
+                </div>
+                <div class="nav-links">
+                    <a href="#">Features</a>
+                    <a href="#">Integrations</a>
+                    <a href="#">Resources</a>
+                    <a href="#">Developers</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="demo-btn">Get started</button>
+                </div>
+            </nav>
+        </div>
+    </header> -->
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <img style="width: 80%;" src="./src/logo/embroidery.png" />
+            <h1>India's biggest Web3 Media Agency</h1>
+            <h2>Redefining the future of events with Blockchain</h2>
+            <br><br>
+            <!-- <div class="checkout-preview">
+                <div class="cart-item">
+                    <div class="item-details">
+                        <div class="item-image"></div>
+                        <div class="item-info">
+                            <h4>Action Camera</h4>
+                            <p>Quantity: 1</p>
+                        </div>
+                    </div>
+                    <div class="item-price">$400.00</div>
+                </div>
+                <div class="cart-item">
+                    <div class="item-details">
+                        <div class="item-image"></div>
+                        <div class="item-info">
+                            <h4>Drone</h4>
+                            <p>Quantity: 1</p>
+                        </div>
+                    </div>
+                    <div class="item-price">$2,100.00</div>
+                </div>
+                <div class="cart-total">
+                    <span>Total</span>
+                    <span>$2,700.00</span>
+                </div>
+                <button class="checkout-btn">Checkout</button>
+            </div> -->
+            
+            <!-- <div class="payment-methods">
+                <img src="./src/logo/embroidery.png" alt="Klarna" class="payment-method">
+                <img src="./src/logo/embroidery.png" alt="Complex" class="payment-method">
+                <img src="./src/logo/embroidery.png" alt="Editorialisi" class="payment-method">
+                <img src="./src/logo/embroidery.png" alt="Publicsquare" class="payment-method">
+                <img src="./src/logo/embroidery.png" alt="Bally" class="payment-method">
+                <img src="https://via.placeholder.com/80x20?text=THRONE" alt="Throne" class="payment-method">
+            </div> -->
+
+            <div class="payment-methods" id="community-partnersgallery"></div>
+            
+            <h2 class="trust-text">Trusted by Communities and Web3 companies all over the world</h2>
+        </div>
+    </section>
+    <div class="advancements-section" style="background-image: url(./src/beautify/border-reverse.avif); padding: 7px;"></div>
+
+    <!-- Problem Section -->
+    <section class="problem-section">
+        <div class="container">
+            <h2 class="section-title">Struggling to find a Gateway to your Success as a company?</h2>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <h3>Operations</h3>
+                    <p>We can help you to find right audience and help you curate your work</p>
+                </div>
+                
+                <div class="problem-card">
+                    <h3>Partnerships</h3>
+                    <p>We can share your work pressures from community till event management partnerships</p>
+                </div>
+                
+                <div class="problem-card">
+                    <h3>Ecosystem Management</h3>
+                    <p>We can create a geographical ecosystem and manage the whole operations for you</p>
+                </div>
+
+                <div class="problem-card">
+                    <h3>GTM Support</h3>
+                    <p>We can help you craft a region based niche for your product launch</p>
+                </div>
+            </div>
+            
+            <a href="https://linktr.ee/connectverseweb3" class="integrations-link">Know more about us →</a>
+        </div>
+    </section>
+    <div class="advancements-section" style="background-image: url(./src/beautify/border.avif); padding: 7px;"></div>
+
+    <!-- Solutions Section -->
+    <section class="solutions-section">
+        <div class="container">
+            <h2 class="section-title">Onboarding Made Easier</h2>
+            <div class="solution-cards">
+                <div class="solution-card">
+                    <div class="solution-image"><img src="./src/images/event-1.avif"/></div>
+                    <div class="solution-content">
+                        <h3>250+ IRL Events</h3>
+                        <p>Having hosted over 250 in-person events, we’ve successfully united Web3 enthusiasts, developers, and thought leaders to drive innovation and adoption within specific ecosystems.</p>
+                        <div class="solution-actions">
+                            <a href="https://calendly.com/quantumworld394/30min"><button class="solution-btn primary-btn">Book a Call</button></a>
+                            <!-- <button class="solution-btn secondary-btn">Read The Docs</button> -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="solution-card">
+                    <div class="solution-image"><img src="./src/images/event-2.avif"/></div>
+                    <div class="solution-content">
+                        <h3>Onboard with Us</h3>
+                        <p>Collaborate with us to organize and host your in-person events, bootcamps, and hackathons. Whether you're looking to foster innovation, drive user engagement, or accelerate the growth of your platform, ConnectVerse is the perfect catalyst to help you achieve these goals.</p>
+                        <div class="solution-actions">
+                            <a href="https://calendly.com/quantumworld394/30min"><button class="solution-btn primary-btn">Book a Call</button></a>
+                            <!-- <button class="solution-btn secondary-btn">Read The Docs</button> -->
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="testimonial-section">
+        <div class="container">
+            <div class="awards">
+                <!-- <div class="award">
+                    <br><br><br>
+                    <div class="award-icon">🏆</div>
+                    <h3>ECOMMERCE AWARDS 2023</h3>
+                    <p>SILVER<br>Payment Innovation of the Year</p>
+                </div> -->
+            </div>
+            
+            <p class="testimonial">The only solution you need to boost your ecosystem adoption.</p>
+            <p class="author"><a href="https://calendly.com/quantumworld394/30min"><button class="solution-btn primary-btn">Book a Call</button></a></p>
+        </div>
+    </section>
+    <div class="advancements-section" style="background-image: url(./src/beautify/border-reverse.avif); padding: 7px;"></div>
+
+    <!-- Blog Section -->
+    <section class="blog-section">
+        <div class="container">
+            <h2 class="section-title">From Our Blog</h2>
+            
+            <div class="blog-posts">
+                <div class="blog-card">
+                    <a class="twitter-timeline" href="https://twitter.com/ConnectVerse3">Tweets by ConnectVerse</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advancements Section -->
+    <section class="advancements-section">
+            <p class="testimonial">"We spent a lot of time developing and configuring to bring the best output possible for web3 companies and clients. With ConnectVerse, we are now able to connect everything to a single place and curate the experiences."</p>
+            <p class="author">Pranav Verma, Founder</p><br><br>
+            <a href="https://calendly.com/quantumworld394/30min"><button class="solution-btn primary-btn">Book a Call</button></a>
+    </section>
+    <div class="advancements-section" style="background-image: url(./src/beautify/border.avif); padding: 7px;"></div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <!-- <div class="footer-grid">
+                <div class="footer-links">
+                    <div class="footer-logo">
+                        <img style="width: 200px;" src="./src/logo/embroidery.png" />
+                        <p class="footer-bottom">India's biggest Web3 Media Agency</p>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Features</h3>
+                    <ul>
+                        <li><a href="#">Merchant Connections</a></li>
+                        <li><a href="#">Product Catalogs</a></li>
+                        <li><a href="#">Checkout</a></li>
+                        <li><a href="#">Order Updates</a></li>
+                        <li><a href="#">Integrations</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Throne Case Study</a></li>
+                        <li><a href="#">Thingtesting Case Study</a></li>
+                        <li><a href="#">Product Updates</a></li>
+                    </ul>
+                </div>
+            </div> -->
+            
+            <div class="footer-bottom">
+                <div>© 2025 <b>ConnectVerse</b>. All rights reserved.</div>
+                <div class="footer-bottom-links">
+                    <a href="https://linktr.ee/connectverseweb3"><i class="fab fa-website"></i></a>
+                    <a href="https://t.me/connectverseweb3"><i class="fab fa-telegram"></i></a>
+                    <a href="https://twitter.com/ConnectVerse3"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/company/connect-verse/"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/ConnectVerse213"><i class="fab fa-github"></i></a>
+                    <a href="https://www.youtube.com/@ConnectverseYT"><i class="fab fa-youtube"></i></a>
+                    <a href="https://chat.whatsapp.com/LNbcpahKwHmA0U3n8NuQeU"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const community_folderId = '1_3iP81yXMJSLUM8sPl7EDmm10odNQ2kI';
+        const community_apiKey = 'AIzaSyBDJui9IsGMJrdgp-b46_eYHWuqHk0xqBk';
+        const community_galleryDiv = document.getElementById('community-partnersgallery');
+
+        fetch(`https://www.googleapis.com/drive/v3/files?q='${community_folderId}'+in+parents&key=${community_apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.files && data.files.length > 0) {
+            data.files.forEach(file => {
+                if (file.mimeType.includes("image")) {
+                const img = document.createElement('img');
+                img.src = `https://drive.google.com/thumbnail?export=view&id=${file.id}`;
+                img.style.width = '60px';
+                img.style.margin = '10px';
+                community_galleryDiv.appendChild(img);
+                }
+            });
+            } else {
+            community_galleryDiv.innerHTML = 'No images found.';
+            }
+        });
+    </script>
+
+    <script>
+        const sponsorship_folderId = '1Uu-U5m4q3f6iV2ifMY6favZQGYjuRXyK';
+        const sponsorship_apiKey = 'AIzaSyBDJui9IsGMJrdgp-b46_eYHWuqHk0xqBk';
+        const sponsorship_galleryDiv = document.getElementById('community-partnersgallery');
+
+        fetch(`https://www.googleapis.com/drive/v3/files?q='${sponsorship_folderId}'+in+parents&key=${sponsorship_apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.files && data.files.length > 0) {
+            data.files.forEach(file => {
+                if (file.mimeType.includes("image")) {
+                const img = document.createElement('img');
+                img.src = `https://drive.google.com/thumbnail?export=view&id=${file.id}`;
+                img.style.width = '60px';
+                img.style.margin = '10px';
+                sponsorship_galleryDiv.appendChild(img);
+                }
+            });
+            } else {
+            sponsorship_galleryDiv.innerHTML = 'No images found.';
+            }
+        });
+    </script>
+    
+    <script>
+        // Simple JavaScript for interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
