@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ConnectVerse</title>
-    <link rel="icon" href="./src/logo.png" type="image/png">
+    <title>ConnectVerse - Web3 Marketing & Community Growth</title>
+    <meta name="description" content="Web3 marketing agency specializing in community growth, influencer marketing, and go-to-market strategies for blockchain projects">
+    <link rel="icon" href="./src/logo/logo.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -69,8 +70,15 @@
             position: fixed;
             width: 100%;
             z-index: 1000;
-            padding: 20px 0;
+            padding: 15px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 10px 0;
+            backdrop-filter: blur(15px);
+            background: rgba(10, 10, 18, 0.95);
         }
         
         nav {
@@ -82,30 +90,20 @@
         .logo {
             font-size: 24px;
             font-weight: 700;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
             display: flex;
             align-items: center;
+            text-decoration: none;
         }
         
-        .logo i {
+        .logo-image {
+            max-width: 200px;
+            height: 40px;
             margin-right: 10px;
         }
-
-        .payment-method {
-            height: 24px;
-            opacity: 0.7;
-            transition: opacity 0.2s;
-        }
         
-        .payment-method:hover {
-            opacity: 1;
-        }
-        
-        .trust-text {
-            margin-top: 30px;
+        .logo-text {
+            color: white;
+            font-weight: 400;
         }
         
         .nav-links {
@@ -140,6 +138,9 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(110, 69, 226, 0.4);
             font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .cta-button:hover {
@@ -147,7 +148,7 @@
             box-shadow: 0 6px 20px rgba(110, 69, 226, 0.6);
         }
         
-        /* Hero Section - Enhanced */
+        /* Hero Section */
         .hero {
             padding: 220px 0 150px;
             text-align: center;
@@ -165,7 +166,7 @@
             height: 200%;
             background: radial-gradient(circle at center, rgba(110, 69, 226, 0.15) 0%, rgba(15, 15, 26, 0) 70%);
             animation: rotate 20s linear infinite;
-            z-index: -1;
+            z-index: 1;
         }
         
         .hero-content {
@@ -212,6 +213,9 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .secondary-button:hover {
@@ -323,6 +327,45 @@
             background: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
             pointer-events: none;
+        }
+        
+        /* Trusted Partners Section */
+        .trusted-partners {
+            padding: 60px 0;
+            background: var(--gradient);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .trust-text {
+            font-size: 2rem;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+            /* padding: 20px 0; */
+        }
+        
+        .marquee-content img {
+            height: 60px;
+            margin: 0 30px;
+            vertical-align: middle;
+            transition: all 0.3s ease;
+        }
+        
+        .marquee-content img:hover {
+            transform: scale(1.1);
         }
         
         /* Services Section */
@@ -501,14 +544,33 @@
             margin-top: 3px;
         }
         
+        .benefits-list h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .benefits-list p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+        }
+        
         .why-us-image {
             position: relative;
+            border-radius: 15px;
+            overflow: hidden;
         }
         
         .why-us-image img {
             width: 100%;
+            height: auto;
+            display: block;
             border-radius: 15px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: transform 0.5s ease;
+        }
+        
+        .why-us-image:hover img {
+            transform: scale(1.03);
         }
         
         .glow {
@@ -538,6 +600,11 @@
             border-radius: 10px;
             overflow: hidden;
             background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            border-color: rgba(255, 255, 255, 0.2);
         }
         
         .faq-question {
@@ -601,31 +668,6 @@
             margin: 0 auto 40px;
             color: rgba(255, 255, 255, 0.8);
         }
-
-
-        .payment-methods {
-            max-width: 1000px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .payment-method {
-            height: 24px;
-            opacity: 0.7;
-            transition: opacity 0.2s;
-        }
-        
-        .payment-method:hover {
-            opacity: 1;
-        }
-        
-        .trust-text {
-            margin-top: 30px;
-        }
-        
         
         /* Footer */
         footer {
@@ -644,12 +686,10 @@
         .footer-logo {
             font-size: 24px;
             font-weight: 700;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
             margin-bottom: 20px;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .footer-about p {
@@ -666,11 +706,20 @@
             color: var(--light);
             font-size: 1.2rem;
             transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
         }
         
         .social-links a:hover {
             color: var(--secondary);
             transform: translateY(-3px);
+            background: rgba(136, 211, 206, 0.2);
         }
         
         .footer-links h3 {
@@ -731,6 +780,11 @@
             }
         }
         
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
         @keyframes pulse {
             0%, 100% {
                 transform: scale(1);
@@ -771,6 +825,10 @@
             
             .why-us-image {
                 order: -1;
+            }
+            
+            .trust-text {
+                font-size: 1.7rem;
             }
         }
         
@@ -814,32 +872,119 @@
             .nav-links {
                 display: none;
             }
+            
+            .trust-text {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+            
+            .marquee-content img {
+                height: 40px;
+                margin: 0 15px;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .why-us-text h2 {
+                font-size: 2rem;
+            }
+            
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 0.95rem;
+            }
+            
+            .hero-buttons button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .stat-circle {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .stat-circle .number {
+                font-size: 1.2rem;
+            }
+            
+            .trust-text {
+                font-size: 1.3rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title p {
+                font-size: 0.95rem;
+            }
+            
+            .service-card, .feature-card {
+                padding: 20px;
+            }
+            
+            .service-card h3, .feature-card h3 {
+                font-size: 1.2rem;
+            }
+            
+            .service-card p, .feature-card p {
+                font-size: 0.9rem;
+            }
+            
+            .why-us-text h2 {
+                font-size: 1.8rem;
+            }
+            
+            .cta h2 {
+                font-size: 1.8rem;
+            }
+            
+            .cta p {
+                font-size: 1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header>
+    <header id="header">
         <div class="container">
             <nav>
-                <div class="logo">
-                    
-                    <img src="./src/logo.png" alt="ConnectVerse" class="logo-image" style="width: 75px; height: 40px;">
-                    <span style="color: white;font-weight: 0;">ConnectVerse</span>
-                </div>
-                <ul class="nav-links">
+                <a href="#" class="logo">
+                    <img src="./src/logo/transparent background/white-horizontal.png" alt="ConnectVerse" class="logo-image">
+                </a>
+                <!-- <ul class="nav-links">
                     <li><a href="#services">Services</a></li>
                     <li><a href="#features">Features</a></li>
                     <li><a href="#why-us">Why Us</a></li>
                     <li><a href="#faq">FAQ</a></li>
-                    <li><a href="https://calendly.com/quantumworld394/30min"><button class="cta-button" >Get Started</button>
-                    </a></li>
-                </ul>
+                    <li><a href="https://calendly.com/quantumworld394/30min" class="cta-button">Get Started</a></li>
+                </ul> -->
+                <a href="https://calendly.com/quantumworld394/30min"><button class="cta-button mobile-cta">
+                    <i class="fas fa-calendar-check"></i> Get Started
+                </button></a>
             </nav>
         </div>
     </header>
 
-    <!-- Enhanced Hero Section -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="floating-shapes">
             <div class="shape shape-1"></div>
@@ -856,14 +1001,14 @@
                 
                 <div class="hero-buttons">
                     <a href="https://calendly.com/quantumworld394/30min">
-                    <button class="cta-button pulse-animation">
-                        <i class="fas fa-calendar-check"></i> Book Free Consultation
-                    </button>
+                        <button class="cta-button pulse-animation">
+                            <i class="fas fa-calendar-check"></i> Book Free Consultation
+                        </button>
                     </a>
                     <a href="https://t.me/connectverseweb3">
-                    <button class="secondary-button">
-                        <i class="fas fa-user-plus"></i> Join Community
-                    </button>
+                        <button class="secondary-button">
+                            <i class="fas fa-user-plus"></i> Join Community
+                        </button>
                     </a>
                 </div>
                 
@@ -887,83 +1032,24 @@
                 </div>
             </div>
         </div>
+            <div class="container">
+                <br><br><br>
+                <h2 class="trust-text">Trusted by Communities and Web3 companies all over the world</h2>
+                <div class="marquee-container">
+                    <div class="marquee-content" id="community-partnersgallery"></div>
+                </div>
+            </div>
     </section>
-    <center>
-        <h2 class="trust-text" style="font-size: 2rem; font-weight: 600; color: white;">Trusted by Communities and Web3 companies all over the world</h2>
-        <br>
-        <div class="payment-methods" id="community-partnersgallery"></div>
-
-       
-        <style>
-            .marquee-container {
-                width: 100%;
-                overflow: hidden;
-                white-space: nowrap;
-            }
-            
-            .marquee-content {
-                display: inline-block;
-                animation: marquee 20s linear infinite;
-            }
-            
-            @keyframes marquee {
-                0% { transform: translateX(0); }
-                100% { transform: translateX(-100%); }
-            }
-            
-            .marquee-content img {
-                height: 60px;
-                margin: 0 30px;
-                vertical-align: middle;
-            }
-        </style>
-        
-        <script>
-            const community_folderId = '1_3iP81yXMJSLUM8sPl7EDmm10odNQ2kI';
-            const community_apiKey = 'AIzaSyBDJui9IsGMJrdgp-b46_eYHWuqHk0xqBk';
-            const community_galleryDiv = document.getElementById('community-partnersgallery');
-            
-            // Create marquee container
-            const marqueeContainer = document.createElement('div');
-            marqueeContainer.className = 'marquee-container';
-            community_galleryDiv.appendChild(marqueeContainer);
-            
-            // Create marquee content
-            const marqueeContent = document.createElement('div');
-            marqueeContent.className = 'marquee-content';
-            marqueeContainer.appendChild(marqueeContent);
-            
-            fetch(`https://www.googleapis.com/drive/v3/files?q='${community_folderId}'+in+parents&key=${community_apiKey}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.files && data.files.length > 0) {
-                    // First pass - add all images
-                    data.files.forEach(file => {
-                        if (file.mimeType.includes("image")) {
-                            const img = document.createElement('img');
-                            img.src = `https://drive.google.com/thumbnail?export=view&id=${file.id}`;
-                            img.alt = file.name;
-                            marqueeContent.appendChild(img);
-                        }
-                    });
-                    
-                    // Second pass - duplicate images for seamless looping
-                    data.files.forEach(file => {
-                        if (file.mimeType.includes("image")) {
-                            const img = document.createElement('img');
-                            img.src = `https://drive.google.com/thumbnail?export=view&id=${file.id}`;
-                            img.alt = file.name;
-                            marqueeContent.appendChild(img);
-                        }
-                    });
-                } else {
-                    marqueeContent.innerHTML = 'No images found.';
-                }
-            });
-        </script>
-
-            
-</center>
+<!-- 
+    Trusted Partners Section
+    <section class="trusted-partners">
+        <div class="container">
+            <h2 class="trust-text">Trusted by Communities and Web3 companies all over the world</h2>
+            <div class="marquee-container">
+                <div class="marquee-content" id="community-partnersgallery"></div>
+            </div>
+        </div>
+    </section> -->
 
     <!-- Services Section -->
     <section class="services" id="services">
@@ -979,7 +1065,6 @@
                     </div>
                     <h3>Community Engagement</h3>
                     <p>We grow and engage your community through creative on-ground activations and online strategies that keep your audience loyal and fired up.</p>
-                    
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
@@ -987,7 +1072,6 @@
                     </div>
                     <h3>Go-To-Market Strategy</h3>
                     <p>We craft focused, region or niche specific GTM strategies to launch your project with impact, capture the right audience, and set you up for success from day one.</p>
-                   
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
@@ -995,7 +1079,6 @@
                     </div>
                     <h3>Influencer/KOL Marketing</h3>
                     <p>We provide exclusive access to a network of 3000+ handpicked KOLs which we have built over 4 years.</p>
-                   
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
@@ -1003,7 +1086,6 @@
                     </div>
                     <h3>Web3 Business Development</h3>
                     <p>We steer your project through Web3 with custom strategies to overcome challenges and capture new opportunities.</p>
-                    
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
@@ -1011,7 +1093,6 @@
                     </div>
                     <h3>Whitepaper Development</h3>
                     <p>Professional whitepaper creation that clearly communicates your project's vision, technology, and value proposition.</p>
-                   
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
@@ -1019,7 +1100,6 @@
                     </div>
                     <h3>Token Launch</h3>
                     <p>End-to-end support for your token launch including strategy, marketing, and execution.</p>
-                    
                 </div>
             </div>
         </div>
@@ -1149,7 +1229,7 @@
                     </ul>
                 </div>
                 <div class="why-us-image">
-                    <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=2232&auto=format&fit=crop" alt="Web3 Team Collaboration">
+                    <img src="./src/logo/helicopter-connectverse.png" alt="Web3 Collaboration">
                     <div class="glow"></div>
                 </div>
             </div>
@@ -1170,7 +1250,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>We've developed a rigorous vetting process over our 7 years in crypto marketing. We analyze engagement rates, audience quality, past campaign performance, and use proprietary tools to detect fake followers. Only about 10% of applicants make it into our network.</p>
+                        <p>We've developed a rigorous vetting process over our 3 years in crypto marketing. We analyze engagement rates, audience quality, past campaign performance, and use proprietary tools to detect fake followers. Only about 10% of applicants make it into our network.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -1218,7 +1298,11 @@
         <div class="container">
             <h2>Ready to Accelerate Your Web3 Growth?</h2>
             <p>Schedule a free consultation with our team to discuss how we can help your project succeed in the competitive blockchain space.</p>
-            <button class="cta-button pulse-animation">Get Started Today</button>
+            <a href="https://calendly.com/quantumworld394/30min">
+                <button class="cta-button pulse-animation">
+                    <i class="fas fa-calendar-check"></i> Get Started Today
+                </button>
+            </a>
         </div>
     </section>
 
@@ -1228,17 +1312,15 @@
             <div class="footer-content">
                 <div class="footer-about">
                     <div class="footer-logo">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <img src="./src/logo.png" alt="ConnectVerse" class="logo-image" style="width: 75px; height: 40px;">
-                            <span style="color: white;font-weight: 0;">ConnectVerse</span>
-                        </div>
+                        <img src="./src/logo/embroidery.png" alt="ConnectVerse" style="max-width: 200px;">
                     </div>
                     <p>We help blockchain projects build engaged communities, launch successfully, and grow through data-driven influencer marketing and strategic business development.</p>
                     <div class="social-links">
-                        <a href="https://x.com/connectverse3"><i class="fab fa-twitter"></i></a>
-                        <a href="https://t.me/kabhiram"><i class="fab fa-telegram"></i></a>
-                   
-                        <a href="https://www.linkedin.com/company/connect-verse/"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://linktr.ee/connectverseweb3" aria-label="Twitter"><i class="fas fa-play"></i></a>
+                        <a href="https://x.com/connectverse3" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://t.me/connectverseweb3" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                        <a href="https://www.linkedin.com/company/connect-verse/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://chat.whatsapp.com/E8hwgg4VsWtFSkA73U6Fh4" aria-label="Twitter"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
                 <div class="footer-links">
@@ -1254,49 +1336,79 @@
                 <div class="footer-links">
                     <h3>Company</h3>
                     <ul>
-                        <li><a href="#community-partnersgallery">Partners</a></li>
+                        <li><a href="#">Partners</a></li>
                         <li><a href="#services">Services</a></li>
                         <li><a href="#features">Features</a></li>
                         <li><a href="#faq">FAQ</a></li> 
                         <li><a href="https://calendly.com/quantumworld394/30min">Contact Us</a></li>
                     </ul>
                 </div>
-               
+                <div class="footer-links">
+                    <h3>Meet our Founders</h3>
+                    <ul>
+                        <li><a href="https://instagram.com/pranavverma213">Pranav Verma</a></li>
+                        <li><a href="https://abhiram.bio.link/">Abhiram K</a></li>
+                    </ul>
+                </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 Web3Growth Agency. All rights reserved.</p>
+                <p>&copy; 2025 ConnectVerse. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- <script>
+    <script>
+        // Load partners from Google Drive
         const community_folderId = '1_3iP81yXMJSLUM8sPl7EDmm10odNQ2kI';
         const community_apiKey = 'AIzaSyBDJui9IsGMJrdgp-b46_eYHWuqHk0xqBk';
         const community_galleryDiv = document.getElementById('community-partnersgallery');
-
+        
         fetch(`https://www.googleapis.com/drive/v3/files?q='${community_folderId}'+in+parents&key=${community_apiKey}`)
         .then(response => response.json())
         .then(data => {
             if (data.files && data.files.length > 0) {
-            data.files.forEach(file => {
-                if (file.mimeType.includes("image")) {
-                const img = document.createElement('img');
-                img.src = `https://drive.google.com/thumbnail?export=view&id=${file.id}`;
-                img.style.width = '60px';
-                img.style.margin = '10px';
-                community_galleryDiv.appendChild(img);
-                }
-            });
+                // First pass - add all images
+                data.files.forEach(file => {
+                    if (file.mimeType.includes("image")) {
+                        const img = document.createElement('img');
+                        img.src = `https://drive.google.com/thumbnail?export=view&id=${file.id}`;
+                        img.alt = file.name;
+                        img.loading = "lazy";
+                        community_galleryDiv.appendChild(img);
+                    }
+                });
+                
+                // Second pass - duplicate images for seamless looping
+                data.files.forEach(file => {
+                    if (file.mimeType.includes("image")) {
+                        const img = document.createElement('img');
+                        img.src = `https://drive.google.com/thumbnail?export=view&id=${file.id}`;
+                        img.alt = file.name;
+                        img.loading = "lazy";
+                        community_galleryDiv.appendChild(img);
+                    }
+                });
             } else {
-            community_galleryDiv.innerHTML = 'No images found.';
+                community_galleryDiv.innerHTML = 'No partner logos found.';
+            }
+        })
+        .catch(error => {
+            console.error('Error loading partner logos:', error);
+            community_galleryDiv.innerHTML = 'Loading partner logos...';
+        });
+
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
         });
-    </script> -->
 
-    <script>
-        // Enhanced Hero Animation
+        // Create floating particles
         document.addEventListener('DOMContentLoaded', function() {
-            // Create floating particles
             const particlesContainer = document.getElementById('particles-js');
             const particleCount = window.innerWidth < 768 ? 30 : 50;
             
@@ -1322,7 +1434,7 @@
                 particlesContainer.appendChild(particle);
             }
             
-            // Text animation
+            // Typewriter effect for hero title
             const heroTitle = document.querySelector('.hero h1');
             const heroText = heroTitle.textContent;
             heroTitle.textContent = '';
@@ -1333,21 +1445,8 @@
                 charIndex++;
                 if (charIndex === heroText.length) {
                     clearInterval(typeInterval);
-                    // Start pulse animation on CTA button
-                    document.querySelector('.cta-button').classList.add('pulse-animation');
                 }
             }, 50);
-            
-            // Rotate stats circles on hover
-            const statCircles = document.querySelectorAll('.stat-circle');
-            statCircles.forEach(circle => {
-                circle.addEventListener('mouseenter', () => {
-                    circle.style.transform = 'translateY(-10px) rotate(5deg)';
-                });
-                circle.addEventListener('mouseleave', () => {
-                    circle.style.transform = 'translateY(0) rotate(0)';
-                });
-            });
         });
         
         // FAQ functionality
@@ -1366,14 +1465,35 @@
         
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update URL without jumping
+                    if (history.pushState) {
+                        history.pushState(null, null, targetId);
+                    } else {
+                        location.hash = targetId;
+                    }
+                }
             });
         });
+
+        // Mobile menu toggle (would need additional HTML/CSS)
+        // This is a placeholder for mobile menu functionality
+        const mobileCta = document.querySelector('.mobile-cta');
+        if (mobileCta) {
+            mobileCta.addEventListener('click', () => {
+                window.location.href = 'https://calendly.com/quantumworld394/30min';
+            });
+        }
     </script>
 </body>
 </html>
