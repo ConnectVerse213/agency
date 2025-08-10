@@ -1305,6 +1305,21 @@
         </div>
     </section>
 
+    
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Glimpse of our recent events</h2>
+                <p>Memorable moments from our journey across India</p>
+            </div>
+            <div class="gallery-container" id="tour-gallery">
+                <!-- Images will be loaded dynamically from Google Drive -->
+                <div class="gallery-loading">Loading tour photos...</div>
+            </div>
+        </div>
+    </section>
+
     <!-- Features Section -->
     <section class="features" id="features">
     <div class="container">
@@ -1434,34 +1449,6 @@
         </div>
     </section>
 
-    <!-- Map Section -->
-    <section class="map-section" id="map">
-        <div class="container">
-            <div class="section-title">
-                <h2 style="color: white;">Cities We Visited</h2>
-                <p>Our nationwide tour covered these key educational hubs across India</p>
-            </div>
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/d/embed?mid=1D6ko6xMfo_MdPwGDWDqtvGwEEphBdzU" width="640" height="480"></iframe>
-                <div class="map-overlay"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section class="gallery" id="gallery">
-        <div class="container">
-            <div class="section-title">
-                <h2>Gallery</h2>
-                <p>Memorable moments from our journey across India</p>
-            </div>
-            <div class="gallery-container" id="tour-gallery">
-                <!-- Images will be loaded dynamically from Google Drive -->
-                <div class="gallery-loading">Loading tour photos...</div>
-            </div>
-        </div>
-    </section>
-
     <!-- Testimonials Section -->
     <section class="testimonials">
         <div class="container">
@@ -1473,7 +1460,7 @@
                 <div class="testimonial-card">
                     <p class="testimonial-text">"The ConnectVerse workshop opened my eyes to the possibilities of Web3. I went from knowing nothing about blockchain to building my first dApp in just two days!"</p>
                     <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Student" class="author-avatar">
+                        <!-- <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Student" class="author-avatar"> -->
                         <div class="author-info">
                             <h4>Rahul Sharma</h4>
                             <p>Computer Science Student, IIT Delhi</p>
@@ -1483,7 +1470,7 @@
                 <div class="testimonial-card">
                     <p class="testimonial-text">"As a professor, I appreciate how ConnectVerse made complex blockchain concepts accessible to our students. Their hands-on approach was exactly what our curriculum needed."</p>
                     <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Professor" class="author-avatar">
+                        <!-- <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Professor" class="author-avatar"> -->
                         <div class="author-info">
                             <h4>Dr. Priya Patel</h4>
                             <p>Professor, BITS Pilani</p>
@@ -1493,7 +1480,7 @@
                 <div class="testimonial-card">
                     <p class="testimonial-text">"Partnering with ConnectVerse for our campus events was a game-changer. The quality of talent we've discovered through their hackathons has been exceptional."</p>
                     <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Industry Partner" class="author-avatar">
+                        <!-- <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Industry Partner" class="author-avatar"> -->
                         <div class="author-info">
                             <h4>Arjun Mehta</h4>
                             <p>CTO, Web3 Startup</p>
@@ -1505,7 +1492,7 @@
     </section>
 
     <!-- FAQ Section -->
-   <section class="faq" id="faq">
+    <section class="faq" id="faq">
     <div class="container">
         <div class="section-title">
             <h2>Frequently Asked Questions</h2>
@@ -1559,7 +1546,21 @@
             </div>
         </div>
     </div>
-</section>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section" id="map">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="color: white;">Cities We Visited</h2>
+                <p>Our nationwide tour covered these key educational hubs across India</p>
+            </div>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/d/embed?mid=1D6ko6xMfo_MdPwGDWDqtvGwEEphBdzU" width="640" height="480"></iframe>
+                <div class="map-overlay"></div>
+            </div>
+        </div>
+    </section>
 
     <!-- CTA Section -->
     <section class="cta">
@@ -1660,8 +1661,47 @@
             console.error('Error loading tour photos:', error);
             tour_galleryDiv.innerHTML = 'Loading tour photos...';
         });
-
+        
         // Load partners from Google Drive
+        const partner_folderId = '1Uu-U5m4q3f6iV2ifMY6favZQGYjuRXyK';
+        const partner_apiKey = 'AIzaSyBDJui9IsGMJrdgp-b46_eYHWuqHk0xqBk';
+        const partner_galleryDiv = document.getElementById('community-partnersgallery');
+        
+        fetch(`https://www.googleapis.com/drive/v3/files?q='${partner_folderId}'+in+parents&key=${partner_apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.files && data.files.length > 0) {
+                // First pass - add all images
+                data.files.forEach(file => {
+                    if (file.mimeType.includes("image")) {
+                        const img = document.createElement('img');
+                        img.src = `https://drive.google.com/thumbnail?export=view&id=${file.id}`;
+                        img.alt = file.name;
+                        img.loading = "lazy";
+                        partner_galleryDiv.appendChild(img);
+                    }
+                });
+                
+                // Second pass - duplicate images for seamless looping
+                // data.files.forEach(file => {
+                //     if (file.mimeType.includes("image")) {
+                //         const img = document.createElement('img');
+                //         img.src = `https://drive.google.com/thumbnail?export=view&id=${file.id}`;
+                //         img.alt = file.name;
+                //         img.loading = "lazy";
+                //         partner_galleryDiv.appendChild(img);
+                //     }
+                // });
+            } else {
+                partner_galleryDiv.innerHTML = 'No partner logos found.';
+            }
+        })
+        .catch(error => {
+            console.error('Error loading partner logos:', error);
+            partner_galleryDiv.innerHTML = 'Loading partner logos...';
+        });
+
+        // Load community partners from Google Drive
         const community_folderId = '1_3iP81yXMJSLUM8sPl7EDmm10odNQ2kI';
         const community_apiKey = 'AIzaSyBDJui9IsGMJrdgp-b46_eYHWuqHk0xqBk';
         const community_galleryDiv = document.getElementById('community-partnersgallery');
@@ -1682,15 +1722,15 @@
                 });
                 
                 // Second pass - duplicate images for seamless looping
-                data.files.forEach(file => {
-                    if (file.mimeType.includes("image")) {
-                        const img = document.createElement('img');
-                        img.src = `https://drive.google.com/thumbnail?export=view&id=${file.id}`;
-                        img.alt = file.name;
-                        img.loading = "lazy";
-                        community_galleryDiv.appendChild(img);
-                    }
-                });
+                // data.files.forEach(file => {
+                //     if (file.mimeType.includes("image")) {
+                //         const img = document.createElement('img');
+                //         img.src = `https://drive.google.com/thumbnail?export=view&id=${file.id}`;
+                //         img.alt = file.name;
+                //         img.loading = "lazy";
+                //         community_galleryDiv.appendChild(img);
+                //     }
+                // });
             } else {
                 community_galleryDiv.innerHTML = 'No partner logos found.';
             }
