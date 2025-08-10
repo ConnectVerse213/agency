@@ -1644,8 +1644,8 @@
                         galleryItem.innerHTML = `
                             <img src="https://drive.google.com/thumbnail?export=view&id=${file.id}" alt="${file.name}" loading="lazy">
                             <div class="gallery-caption">
-                                <h3>${file.name.split('.')[0]}</h3>
-                                <h3>From ${file.name.split(' ')[1]}</h3>
+                                <h3>${file.name.split(',')[0]}</h3>
+                                <h3>From ${file.name.split(',')[1]}</h3>
                                 <p>From our India Tour 2024</p>
                             </div>
                         `;
