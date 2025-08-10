@@ -414,6 +414,8 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
+            /* flex-wrap: wrap;
+            justify-content: center; */
         }
         
         .service-card {
@@ -489,6 +491,156 @@
         }
         
         .feature-card p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 100px 0;
+            background: radial-gradient(circle at bottom right, rgba(110, 69, 226, 0.05) 0%, rgba(26, 26, 46, 0) 50%);
+        }
+        
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 15, 26, 0.8);
+            padding: 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        .gallery-caption h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .gallery-caption p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Map Section */
+        .map-section {
+            padding: 80px 0;
+            background: var(--gradient-reverse);
+        }
+        
+        .map-container {
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(110, 69, 226, 0.2), rgba(136, 211, 206, 0.2));
+            pointer-events: none;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            /* padding: 100px 0; */
+            background: radial-gradient(circle at center, rgba(136, 211, 206, 0.05) 0%, rgba(26, 26, 46, 0) 70%);
+        }
+        
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .testimonial-text {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--secondary);
+        }
+        
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            font-size: 0.9rem;
             color: rgba(255, 255, 255, 0.7);
         }
         
@@ -845,6 +997,14 @@
             .trust-text {
                 font-size: 1.7rem;
             }
+
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
         }
         
         @media (max-width: 768px) {
@@ -908,6 +1068,18 @@
             
             .cta h2 {
                 font-size: 2rem;
+            }
+
+            .map-container {
+                height: 400px;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title p {
+                font-size: 0.95rem;
             }
         }
         
@@ -973,6 +1145,26 @@
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 30px;
+            }
+
+            .section-title h2 {
+                font-size: 1.6rem;
+            }
+            
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .highlight-card, .testimonial-card {
+                padding: 20px;
+            }
+            
+            .highlight-card h3, .testimonial-text {
+                font-size: 1.2rem;
+            }
+            
+            .highlight-card p {
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -1097,12 +1289,18 @@
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-chart-line"></i>
+                        <i class="fas fa-award"></i>
                     </div>
                     <h3>0xAcademy</h3>
                     <p>Our EdTech initiative, 0xAcademy, delivers Web3 education online while introducing and showcasing your developer tools to a targeted audience.</p>
                 </div>
-               
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>0xGrow</h3>
+                    <p>Our initiative, 0xGrow, delivers GTM strategies and brings up new initiatives for the clients.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1185,57 +1383,126 @@
 
     <!-- Why Choose Us -->
    <section class="why-us" id="why-us">
-    <div class="container">
-        <div class="why-us-content">
-            <div class="why-us-text">
-                <h2>Why Choose ConnectVerse?</h2>
-                <p>Because in the Web3 world, connecting with the right developers at the right time can define your success — and we’ve perfected that art.</p>
-                <ul class="benefits-list">
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        <div>
-                            <h4>Proven Track Record</h4>
-                            <p>250+ IRL events, 20+ city activations, and thousands of developers engaged across India.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        <div>
-                            <h4>Industry Trusted</h4>
-                            <p>Chosen by leading Web3 companies for developer advocacy and community building.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        <div>
-                            <h4>End-to-End Execution</h4>
-                            <p>From ideation to execution, we handle every detail of your developer engagement strategy.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        <div>
-                            <h4>Hybrid Activation Model</h4>
-                            <p>Seamlessly blending offline events with online education for sustained impact.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        <div>
-                            <h4>Results You Can Measure</h4>
-                            <p>We track real adoption, engagement, and ROI — not just vanity metrics.</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="why-us-image">
-                <img src="./src/logo/helicopter-connectverse.png" alt="ConnectVerse Developer Advocacy">
-                <div class="glow"></div>
+        <div class="container">
+            <div class="why-us-content">
+                <div class="why-us-text">
+                    <h2>Why Choose ConnectVerse?</h2>
+                    <p>Because in the Web3 world, connecting with the right developers at the right time can define your success — and we’ve perfected that art.</p>
+                    <ul class="benefits-list">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>Proven Track Record</h4>
+                                <p>250+ IRL events, 20+ city activations, and thousands of developers engaged across India.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>Industry Trusted</h4>
+                                <p>Chosen by leading Web3 companies for developer advocacy and community building.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>End-to-End Execution</h4>
+                                <p>From ideation to execution, we handle every detail of your developer engagement strategy.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>Hybrid Activation Model</h4>
+                                <p>Seamlessly blending offline events with online education for sustained impact.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>Results You Can Measure</h4>
+                                <p>We track real adoption, engagement, and ROI — not just vanity metrics.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="why-us-image">
+                    <img src="./src/logo/helicopter-connectverse.png" alt="ConnectVerse Developer Advocacy">
+                    <div class="glow"></div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
+    <!-- Map Section -->
+    <section class="map-section" id="map">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="color: white;">Cities We Visited</h2>
+                <p>Our nationwide tour covered these key educational hubs across India</p>
+            </div>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/d/embed?mid=1D6ko6xMfo_MdPwGDWDqtvGwEEphBdzU" width="640" height="480"></iframe>
+                <div class="map-overlay"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Gallery</h2>
+                <p>Memorable moments from our journey across India</p>
+            </div>
+            <div class="gallery-container" id="tour-gallery">
+                <!-- Images will be loaded dynamically from Google Drive -->
+                <div class="gallery-loading">Loading tour photos...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What People Say</h2>
+                <p>Feedback from students, professors, and partners about our tour</p>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The ConnectVerse workshop opened my eyes to the possibilities of Web3. I went from knowing nothing about blockchain to building my first dApp in just two days!"</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Student" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Rahul Sharma</h4>
+                            <p>Computer Science Student, IIT Delhi</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"As a professor, I appreciate how ConnectVerse made complex blockchain concepts accessible to our students. Their hands-on approach was exactly what our curriculum needed."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Professor" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Dr. Priya Patel</h4>
+                            <p>Professor, BITS Pilani</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Partnering with ConnectVerse for our campus events was a game-changer. The quality of talent we've discovered through their hackathons has been exceptional."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Industry Partner" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Arjun Mehta</h4>
+                            <p>CTO, Web3 Startup</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- FAQ Section -->
    <section class="faq" id="faq">
@@ -1330,8 +1597,8 @@
                         <li><a href="#services">Community Engagement</a></li>
                         <li><a href="#services">Ambassador Programme</a></li>
                         <li><a href="#services">IRL Events</a></li>
-                        <li><a href="#services">0xAcademy</a></li>
-                       
+                        <li><a href="https://0xAcademy.xyz">0xAcademy</a></li>
+                        <li><a href="https://0xGrow.xyz">0xGrow</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
@@ -1354,12 +1621,46 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 ConnectVerse. All rights reserved.</p>
+                <p>&copy; 2023-2025 ConnectVerse. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
+        //Load photos of India Tour 2024
+        const tour_folderId = '1nd-wqJxn1j49OcuKaxBLpD1hpghYuqVh';
+        const tour_apiKey = 'AIzaSyBDJui9IsGMJrdgp-b46_eYHWuqHk0xqBk';
+        const tour_galleryDiv = document.getElementById('tour-gallery');
+
+        fetch(`https://www.googleapis.com/drive/v3/files?q='${tour_folderId}'+in+parents&key=${tour_apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.files && data.files.length > 0) {
+                tour_galleryDiv.innerHTML = '';
+                data.files.forEach(file => {
+                    if (file.mimeType.includes("image")) {
+                        const galleryItem = document.createElement('div');
+                        galleryItem.className = 'gallery-item';
+                        galleryItem.innerHTML = `
+                            <img src="https://drive.google.com/thumbnail?export=view&id=${file.id}" alt="${file.name}" loading="lazy">
+                            <div class="gallery-caption">
+                                <h3>${file.name.split('.')[0]}</h3>
+                                <h3>From ${file.name.split(' ')[1]}</h3>
+                                <p>From our India Tour 2024</p>
+                            </div>
+                        `;
+                        tour_galleryDiv.appendChild(galleryItem);
+                    }
+                });
+            } else {
+                tour_galleryDiv.innerHTML = 'No tour photos found.';
+            }
+        })
+        .catch(error => {
+            console.error('Error loading tour photos:', error);
+            tour_galleryDiv.innerHTML = 'Loading tour photos...';
+        });
+
         // Load partners from Google Drive
         const community_folderId = '1_3iP81yXMJSLUM8sPl7EDmm10odNQ2kI';
         const community_apiKey = 'AIzaSyBDJui9IsGMJrdgp-b46_eYHWuqHk0xqBk';
@@ -1496,6 +1797,25 @@
                 window.location.href = 'https://calendly.com/quantumworld394/30min';
             });
         }
+
+        // Simple testimonial slider
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonial-card');
+        
+        function showTestimonial(index) {
+            testimonials.forEach((testimonial, i) => {
+                testimonial.style.display = i === index ? 'block' : 'none';
+            });
+        }
+        
+        function nextTestimonial() {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        }
+        
+        // Initialize
+        showTestimonial(0);
+        setInterval(nextTestimonial, 5000);
     </script>
 </body>
 </html>
